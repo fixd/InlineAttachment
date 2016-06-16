@@ -239,7 +239,7 @@
       }
     }
 
-    var remoteFilename = "image-" + Date.now() + "." + extension;
+    var remoteFilename = file.name && file.name.length > 1 ? file.name : "image-" + Date.now() + "." + extension;
     if (typeof settings.remoteFilename === 'function') {
       remoteFilename = settings.remoteFilename(file);
     }
