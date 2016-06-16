@@ -255,7 +255,7 @@
       }
     }
 
-    xhr.open('POST', settings.uploadUrl);
+    xhr.open(settings.uploadMethod, settings.uploadUrl);
 
     // Add any available extra headers
     if (typeof settings.extraHeaders === "object") {
