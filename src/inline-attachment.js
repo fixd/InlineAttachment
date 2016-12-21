@@ -134,6 +134,12 @@
     defaultExtension: 'png',
 
     /**
+     * Input type=file is file browser is needed
+     * calls onSelect
+     */
+    fileSelectInput: null,
+
+    /**
      * JSON field which refers to the uploaded file URL
      */
     jsonFieldName: 'filename',
@@ -376,7 +382,7 @@
   };
 
   /**
-   * Called when a drop event occures
+   * Called when a drop event occurs
    * @param  {Event} e
    * @return {Boolean} if the event was handled
    */
@@ -385,6 +391,27 @@
     for (var i = 0; i < e.dataTransfer.files.length; i++) {
       var file = e.dataTransfer.files[i];
       if (this.isFileAllowed(file)) {
+        result = true;
+        this.onFileInserted(file);
+        this.uploadFile(file);
+      }
+    }
+
+    return result;
+  };
+
+  /**
+   * Called when a file is selected using
+   * @param  {Event} e
+   * @return {Boolean} if the event was handled
+   */
+  inlineAttachment.prototype.onSelect = function(e) {
+    var result = false;
+    var files = e.target.files;
+    var file;
+    for (var i = 0; i < files.length; i++) {
+      file = files[i];
+      if(this.isFileAllowed(file)) {
         result = true;
         this.onFileInserted(file);
         this.uploadFile(file);

@@ -84,6 +84,17 @@
         return false;
       }
     });
+
+    if(options.fileSelectInput)
+      options.fileSelectInput.on('change', function(e) {
+        if(inlineattach.onSelect(e)) {
+          e.stopPropagation();
+          e.preventDefault();
+          return true;
+        } else {
+          return false;
+        }
+      });
   };
 
   inlineAttachment.editors.codemirror4 = codeMirrorEditor4;
