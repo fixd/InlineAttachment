@@ -27,6 +27,7 @@
 
   codeMirrorEditor.prototype.setValue = function(val) {
     var cursor = this.codeMirror.getCursor();
+    cursor.ch = val.length;
     this.codeMirror.setValue(val);
     this.codeMirror.setCursor(cursor);
   };
