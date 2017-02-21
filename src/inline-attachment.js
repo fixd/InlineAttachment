@@ -296,7 +296,19 @@
     if (this.settings.allowedTypes.indexOf('*') === 0){
       return true;
     } else {
-      return this.settings.allowedTypes.indexOf(file.type) >= 0;
+      /**
+       * ie11 bug where file.type is empty
+       * @type {string}
+       */
+      var type = file.type;
+      if(type === "") {
+          type = file.name.split('.').pop();
+          if(type === 'pdf')
+              type = 'application/pdf';
+          else if(['jpg', 'jpeg', 'png', 'gif'].indexOf(type) >= 0)
+              type = 'image/' + type;
+      }
+      return this.settings.allowedTypes.indexOf(type) >= 0;
     }
   };
 
